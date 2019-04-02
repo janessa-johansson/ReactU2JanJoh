@@ -3,7 +3,7 @@
 // Buttons and TextField.
 import React, { Component } from 'react'
 import UserComponent from '../components/UserComponent';
-import WrapperComponent from '../components/WrapperComponent';
+import CardComponent from './CardComponent';
 import style from '../style/Dashboard.module.css';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -65,9 +65,10 @@ export default class DashboardComponent extends Component {
   // Handles onClick functions (add/remove user, toggle color)
   render() {
     return (
+
       <div className={style["wrapper"]}>
         <div className={style["userrender"]}>
-          <WrapperComponent>
+          <CardComponent>
             <UserComponent
               showUsers={this.state.user}
               showColor={this.state.color}
@@ -75,10 +76,10 @@ export default class DashboardComponent extends Component {
             <div className={style["content"]}>
               <Button variant="contained" onClick={this.toggleColor}>Toggle Color</Button>
             </div>
-          </WrapperComponent>
+          </CardComponent>
         </div>
         <div>
-          <WrapperComponent>
+          <CardComponent>
             <form className={style["useredit"]} onSubmit={this.addUser}>
               <TextField variant="filled" type="text" value={this.state.value} onChange={this.handleInput} />
               <br />
@@ -87,7 +88,7 @@ export default class DashboardComponent extends Component {
             <div className={style["content"]}>
               <Button variant="contained" color="secondary" size="large" className={style["remove"]} onClick={this.removeUser}>Remove</Button>
             </div>
-          </WrapperComponent>
+          </CardComponent>
         </div>
       </div>
     )
