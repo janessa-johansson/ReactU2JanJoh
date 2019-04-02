@@ -1,0 +1,21 @@
+.card {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
