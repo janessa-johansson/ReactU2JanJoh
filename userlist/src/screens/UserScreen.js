@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import CardComponent from '../components/CardComponent';
 
-
-export default class UserScreen extends Component {
+class UserScreen extends Component {
+  
+  render() { 
     
-  render() {
     return (
-        <p>This is UserScreen.</p>
+      <div>
+      <CardComponent value="users" />
+      </div>
     )
   }
 }
+
+export default UserScreen;

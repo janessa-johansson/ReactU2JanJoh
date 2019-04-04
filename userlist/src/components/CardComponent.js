@@ -10,6 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
+
+import { withRouter, Route } from 'react-router-dom';
+import PropTypes from "prop-types";
+
 const theme = createMuiTheme({
   palette: {
     primary: green,
@@ -17,8 +21,15 @@ const theme = createMuiTheme({
 });
 
 // Basic class with constructor and display state as boolean
-export default class CardComponent extends Component {
+class CardComponent extends Component {
   
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    children: PropTypes.any, //props.children can be undefined and an object
+    parent: PropTypes.any, //props.parent can be undefined and a string
+    match: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,14 +42,16 @@ export default class CardComponent extends Component {
     this.setState(state => ({ showInfo: !state.showInfo }));
   };
 
-  // Route change??
+  // Route change
 
-  // routeChange = () => {
-  //  
-  // };
+  routeChange = () => {
+   this.props.history.push('/dashboard')
+  };
 
   // Ternary for show/hide button text
   render() {
+    
+    const { match } = this.props;
 
     const show = 'Show info'
     const hide = 'Hide info'
@@ -62,10 +75,17 @@ export default class CardComponent extends Component {
         </MuiThemeProvider>
       </div>
 
+    const userInfo =
+      <div>
+        {this.props.value && this.props.location.state && <p>User: {match.params.user}</p>}
+        {this.props.value && !this.props.location.state && <p>No user selected.</p>}
+      </div>
+  
     // Material Design Card with state.display conditional and toggle function
     return (
       <Fragment>
-        <Card className={this.props.parent ? 'login' : 'card'}>
+        <Card className={this.props.parent || this.props.value ? 'login' : 'card'}>
+          {userInfo}
           {this.props.children}
           {this.props.parent && login}
           {this.state.showInfo && this.props.parent && showInfo}
@@ -76,3 +96,4 @@ export default class CardComponent extends Component {
   };
 }
 
+export default withRouter(CardComponent);

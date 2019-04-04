@@ -5,34 +5,16 @@ import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink, Switch } from "react-router-dom";
 
 import DashboardScreen from '../screens/DashboardScreen';
 import LoginScreen from '../screens/LoginScreen';
 import UserScreen from '../screens/UserScreen';
+import Notfound from '../components/NotFound';
 
 export default class NavbarComponent extends Component {
 
     render() {
-        const routes = [
-            {
-                path: "/",
-                exact: true,
-                main: () =>  <DashboardScreen />
-            },
-            {
-                path: "/dashboard",
-                main: () =>  <DashboardScreen />
-            },
-            {
-                path: "/login",
-                main: () =>  <LoginScreen /> 
-            },
-            {
-                path: "/user",
-                main: () =>  <UserScreen /> 
-            }
-        ];
         return (
             <Router>
                 <AppBar position="static" color="default">
@@ -55,14 +37,13 @@ export default class NavbarComponent extends Component {
                     </Toolbar>
                 </AppBar>
 
-                    {routes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            exact={route.exact}
-                            component={route.main}
-                        />
-                    ))}
+                <Switch>
+                    <Route exact path="/" component={DashboardScreen} />
+                    <Route exact path="/dashboard" component={DashboardScreen} />
+                    <Route path="/login" component={LoginScreen} />
+                    <Route path="/user/:user" component={UserScreen} />
+                    <Route component={Notfound} />
+                </Switch>
             </Router>
 
         )
