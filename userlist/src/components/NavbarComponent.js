@@ -15,7 +15,7 @@ import UserScreen from '../screens/UserScreen';
 import Notfound from '../components/NotFound';
 
 // Handles all functionality for the Navbar and routing, including Navlinks,
-// Switch, and Routes.
+// Switch, Routes, and Redirect from /user to /login.
 export default class NavbarComponent extends Component {
     render() {
         return (
