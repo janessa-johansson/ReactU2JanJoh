@@ -45,6 +45,7 @@ export default class NavbarComponent extends Component {
                     <Route exact path="/dashboard" component={DashboardScreen} />
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/user/:user" component={UserScreen} />
+                    <Route exact path="/user/" component={LoginScreen} />
                     <Route component={Notfound} />
                 </Switch>
             </Router>

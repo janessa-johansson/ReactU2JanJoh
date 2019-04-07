@@ -9,15 +9,22 @@ import TextField from '@material-ui/core/TextField';
 
 import React, { Component } from 'react'
 
-// Basic class with constructor, and states for users (array), colors (boolean),
+// Basic class with constructor, and states for users (object), colors (boolean),
 // and an empty state for value, which is used in the textfield/input.
 export default class DashboardComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: ['pelle', 'kalle'],
+      user: [
+        {id:1, name: 'Mimmi', isActive: true},
+        {id:2, name: 'Kalle', isActive: false},
+        {id:3, name: 'Klara', isActive: true},
+        {id:4, name: 'John', isActive: true},
+        {id:5, name: 'Stina', isActive: false}
+        ],
       color: true,
-      value: ''
+      value: '',
+      tempUser: ''
     }
   }
 
@@ -25,11 +32,20 @@ export default class DashboardComponent extends Component {
   addUser = (event) => {
     const newUser = this.state.value;
     event.preventDefault();
+  
+    // Sets tempUser, which is used below to merge lists.
+    this.setState({
+      tempUser: {
+        id: this.state.user.length + 1,
+        name: newUser,
+        isActive: true
+      }
+    })
 
     // Merges two arrays into user state for displaying users.
-    this.setState({
-      user: [...this.state.user, newUser]
-    })
+    this.setState(prevState =>
+      ({user: [...prevState.user, prevState.tempUser]}));
+    
 
     // Resets value state, so the textfield/input can be cleared upon submit
     this.setState({
@@ -62,17 +78,32 @@ export default class DashboardComponent extends Component {
     this.setState(state => ({ color: !state.color }));
   }
 
+  // Handles toggling of inactive/active state for button
+  toggleActive = () => {
+    this.setState(state => ({ isActive: !state.isActive }));
+  }
+
   // Renders components, styles, and Material Design components (Button/TextField).
   // Handles onClick functions (add/remove user, toggle color)
   render() {
+
+    // Handles button message change depending on inactive/active boolean.
+    const show = 'Show Inactive'
+    const hide = 'Show Active'
+    const buttonMessage = this.state.isActive ? <span>{show}</span> : <span>{hide}</span>;
+
     return (
 
       <div className={style["wrapper"]}>
         <div className={style["userrender"]}>
           <CardComponent>
+            <div className={style["content"]}>
+              <Button variant="contained" onClick={this.toggleActive}>{buttonMessage}</Button>
+            </div>
             <UserComponent
               showUsers={this.state.user}
               showColor={this.state.color}
+              showState={this.state.isActive}
             />
             <div className={style["content"]}>
               <Button variant="contained" onClick={this.toggleColor}>Toggle Color</Button>
@@ -92,6 +123,5 @@ export default class DashboardComponent extends Component {
           </CardComponent>
         </div>
       </div>
-    )
-  };
+    )};
 }

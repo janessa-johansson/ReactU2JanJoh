@@ -26,10 +26,12 @@ const theme = createMuiTheme({
 class CardComponent extends Component {
   
   static propTypes = {
-    history: PropTypes.object.isRequired,
+    history: PropTypes.object,
     children: PropTypes.any, //props.children can be undefined and an object
     parent: PropTypes.any, //props.parent can be undefined and a string
-    match: PropTypes.object
+    match: PropTypes.object,
+    value: PropTypes.string,
+    location: PropTypes.object
   };
 
   constructor(props) {
@@ -48,7 +50,6 @@ class CardComponent extends Component {
   routeChange = () => {
    this.props.history.push('/dashboard')
   };
-
 
   render() {
     
@@ -86,7 +87,7 @@ class CardComponent extends Component {
     const userInfo =
       <div>
         {this.props.value && this.props.location.state && <p>User: {match.params.user}</p>}
-        {this.props.value && !this.props.location.state && <p>No user selected.</p>}
+        {this.props.value && !this.props.location.state && <p>404: Page Not Found</p>}
       </div>
   
     // Material Design Card with several conditionals and toggles, as explained above.
