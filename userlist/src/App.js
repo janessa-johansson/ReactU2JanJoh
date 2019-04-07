@@ -5,12 +5,10 @@ import NavbarComponent from './components/NavbarComponent';
 import './index.css';
 import 'typeface-roboto';
 
-// Renders DashboardComponent, which is the main entry point to the app.
+// Renders Navbar Component, which is the main entry point to the app.
 class App extends Component {
   
-
   render() {
- 
     return (
       <div>
           <NavbarComponent />   
