@@ -1,12 +1,13 @@
 // Imports core functionality from React, required components (Wrapper/User),
 // and imports style module for Dashboard. From Material Design, imports
 // Buttons and TextField.
-import React, { Component } from 'react'
 import UserComponent from '../components/UserComponent';
 import CardComponent from './CardComponent';
 import style from '../style/Dashboard.module.css';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+
+import React, { Component } from 'react'
 
 // Basic class with constructor, and states for users (array), colors (boolean),
 // and an empty state for value, which is used in the textfield/input.

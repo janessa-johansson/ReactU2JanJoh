@@ -1,3 +1,5 @@
+//The main screen/view for the User Screen, used in routing.
+
 import React, { Component } from 'react'
 import CardComponent from '../components/CardComponent';
 

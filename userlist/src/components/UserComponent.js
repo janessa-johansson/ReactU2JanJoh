@@ -1,12 +1,18 @@
-// Imports main functionality from react and style from User module.css
+// Imports main functionality/router/PropTypes from react.
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import { BrowserRouter, Link } from "react-router-dom";
 
-
-// Maps and renders users as props from Dashboard component
-// Returns conditional rendering for color based on props from Dashboard
+// Maps and renders users as props from Dashboard component.
+// Added functionality: rendering each user with a router link/state.
+// Returns conditional rendering for color based on props from Dashboard.
 class UserComponent extends Component {
+  static propTypes = {
+    showUsers: PropTypes.array,
+    showColor: PropTypes.bool
+  };
+
   render() {
 
     const users = this.props.showUsers.map((user, i) => {
